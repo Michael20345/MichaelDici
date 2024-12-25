@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* 背景视频样式 */
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* 让视频在其他元素下方 */
+    }
+
+    /* 界面容器样式 */
+    .screen {
+      display: none; /* 初始隐藏 */
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .screen.active {
+      display: flex; /* 激活的界面显示 */
+    }
+
+    /* 按钮样式 */
+    button {
+      font-size: 36px; /* 字体大小 */
+      padding: 15px 30px;
+      background: transparent; /* 完全透明背景 */
+      color: white; /* 白色文字 */
+      border: none; /* 无边框 */
+      cursor: pointer; /* 鼠标变成手型 */
+      outline: none; /* 去掉点击后的边框 */
+      font-family: "Brush Script MT", cursive; /* 使用内置花体字体 */
+      transition: transform 0.3s ease; /* 平滑动画 */
+    }
+
+    /* 鼠标悬停按钮效果 */
+    button:hover {
+      transform: scale(1.1); /* 鼠标悬停时放大 */
+    }
+
+       /* 矩形框样式 */
+       .message-container {
+      position: relative;
+      padding: 20px; /* 调整内边距 */
+      border: 5px solid; /* 矩形边框宽度 */
+      border-image-source: linear-gradient(to right, red, green); /* 圣诞渐变色 */
+      border-image-slice: 1; /* 使用整个渐变 */
+      display: inline-block; /* 使框大小根据文字调整 */
+      border-radius: 10px; /* 圆角矩形 */
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* 增加发光效果 */
+    }
+    /* Happy Birthday 文字样式 */
+    .message {
+      font-size: 72px; /* 字体大小 */
+      font-weight: bold;
+      text-align: center;
+      margin: 0; /* 去掉默认边距 */
+      opacity: 0; /* 初始隐藏 */
+      transition: opacity 2s ease-in; /* 3秒缓慢显现 */
+
+      /* 金色渐变颜色 */
+      background: linear-gradient(to bottom, #FFD700, #FFA500, #FF4500); /* 金色渐变 */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      /* 光晕效果 */
+      text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.8), 
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 0 30px rgba(255, 165, 0, 0.4),
+        0 0 40px rgba(255, 69, 0, 0.3);
+
+      /* 花体字体 */
+      font-family: "Brush Script MT", cursive; /* 内置花体字体 */
+    }
+
+    .message.visible {
+      opacity: 1; /* 完全显示 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 第一界面 -->
+  <div id="screen1" class="screen active">
+    <video class="video-background" autoplay loop muted playsinline>
+      <source src="rose.mp4" type="video/mp4">
+      <source src="your-first-video.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+    <button id="openButton">Please Open</button>
+  </div>
+
+  <!-- 第二界面 -->
+  <div id="screen2" class="screen">
+    <video class="video-background" autoplay loop muted playsinline>
+      <source src="happy.mp4" type="video/mp4">
+      <source src="your-second-video.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+    <div class="message" id="birthdayMessage">Dici Happy Birthday</div>
+  </div>
+
+  <script>
+    const openButton = document.getElementById("openButton");
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+    const birthdayMessage = document.getElementById("birthdayMessage");
+
+    // 点击按钮后切换到第二界面
+    openButton.addEventListener("click", () => {
+      screen1.classList.remove("active");
+      screen2.classList.add("active");
+
+      // 5秒后显示 Happy Birthday
+      setTimeout(() => {
+        birthdayMessage.classList.add("visible");
+      }, 3000); // 5000ms = 5秒
+    });
+  </script>
+</body>
+</html>
